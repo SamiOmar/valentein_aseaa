@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Code Generator</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        h1 {
+            color: #764ba2;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 40px;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        textarea {
+            width: 100%;
+            padding: 12px;
+            font-size: 16px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-family: 'Georgia', serif;
+            transition: border-color 0.3s;
+        }
+
+        input[type="text"]:focus,
+        textarea:focus {
+            outline: none;
+            border-color: #764ba2;
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 15px;
+            font-size: 18px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(118, 75, 162, 0.3);
+        }
+
+        .btn:active {
+            transform: translateY(0);
+        }
+
+        .output {
+            margin-top: 30px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            border-left: 4px solid #764ba2;
+        }
+
+        .output h3 {
+            color: #764ba2;
+            margin-bottom: 15px;
+        }
+
+        .code-block {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 20px;
+            border-radius: 8px;
+            overflow-x: auto;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        .copy-btn {
+            background: #28a745;
+            padding: 10px 20px;
+            font-size: 14px;
+            width: auto;
+            margin-top: 0;
+        }
+
+        .copy-btn:hover {
+            background: #218838;
+        }
+
+        .hint {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 25px;
+            color: #856404;
+        }
+
+        .hint strong {
+            display: block;
+            margin-bottom: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🌹 Code Generator</h1>
+        <p class="subtitle">Erstelle personalisierte Codes für deine Valentine's Day Seite</p>
+
+        <div class="hint">
+            <strong>💡 Hinweis:</strong>
+            Erstelle hier neue Codes und Nachrichten. Der generierte Code muss dann in die script.js Datei kopiert werden.
+        </div>
+
+        <div class="form-group">
+            <label for="codeInput">Code (z.B. LOVE2024):</label>
+            <input type="text" id="codeInput" placeholder="Gib einen eindeutigen Code ein..." maxlength="20">
+        </div>
+
+        <div class="form-group">
+            <label for="messageInput">Personalisierte Nachricht:</label>
+            <textarea id="messageInput" placeholder="Gib deine romantische Nachricht ein..."></textarea>
+        </div>
+
+        <button class="btn" onclick="generateCode()">Code Generieren</button>
+
+        <div id="output" style="display: none;" class="output">
+            <h3>Generierter Code:</h3>
+            <div class="code-block" id="codeOutput"></div>
+            <button class="btn copy-btn" onclick="copyCode()">Code Kopieren</button>
+
+            <h3 style="margin-top: 25px;">Anleitung:</h3>
+            <ol style="line-height: 1.8; color: #555; margin-left: 20px;">
+                <li>Kopiere den generierten Code oben</li>
+                <li>Öffne die Datei <strong>script.js</strong></li>
+                <li>Füge den Code im <strong>codeMessages</strong> Objekt ein</li>
+                <li>Speichere die Datei</li>
+                <li>Teile den Code (z.B. "<span id="shareCode"></span>") mit der Person</li>
+            </ol>
+        </div>
+    </div>
+
+    <script>
+        function generateCode() {
+            const code = document.getElementById('codeInput').value.trim().toUpperCase();
+            const message = document.getElementById('messageInput').value.trim();
+
+            if (!code || !message) {
+                alert('Bitte fülle beide Felder aus!');
+                return;
+            }
+
+            // Generiere den Code-String
+            const generatedCode = `    '${code}': {
+        message: '${message.replace(/'/g, "\\'")}'
+    },`;
+
+            // Zeige Output
+            document.getElementById('codeOutput').textContent = generatedCode;
+            document.getElementById('shareCode').textContent = code;
+            document.getElementById('output').style.display = 'block';
+
+            // Scrolle zum Output
+            document.getElementById('output').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function copyCode() {
+            const codeText = document.getElementById('codeOutput').textContent;
+            navigator.clipboard.writeText(codeText).then(() => {
+                const btn = event.target;
+                const originalText = btn.textContent;
+                btn.textContent = '✓ Kopiert!';
+                btn.style.background = '#218838';
+                setTimeout(() => {
+                    btn.textContent = originalText;
+                    btn.style.background = '#28a745';
+                }, 2000);
+            }).catch(err => {
+                alert('Fehler beim Kopieren. Bitte manuell kopieren.');
+            });
+        }
+
+        // Enter-Taste Support
+        document.getElementById('messageInput').addEventListener('keypress', function(event) {
+            if (event.key === 'Enter' && event.ctrlKey) {
+                generateCode();
+            }
+        });
+    </script>
+</body>
+</html>
