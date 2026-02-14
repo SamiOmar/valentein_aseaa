@@ -5,10 +5,13 @@
 }
 
 body {
-    font-family: 'Georgia', serif;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     overflow: hidden;
     height: 100vh;
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    direction: rtl;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 .container {
@@ -26,6 +29,7 @@ body {
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
     text-align: center;
     min-width: 350px;
+    max-width: 90vw;
     animation: fadeIn 0.5s ease;
 }
 
@@ -240,45 +244,109 @@ button:active {
 }
 
 .personal-message {
-    font-size: 24px;
+    font-size: 22px;
     color: #764ba2;
     max-width: 600px;
     text-align: center;
-    padding: 20px;
-    background: rgba(255, 255, 255, 0.8);
+    padding: 25px;
+    background: rgba(255, 255, 255, 0.9);
     border-radius: 15px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
     animation: slideUp 1s ease 1s both;
-    line-height: 1.6;
+    line-height: 2;
+    font-weight: 500;
 }
 
 @media (max-width: 768px) {
     .login-box {
-        min-width: 300px;
-        padding: 40px 30px;
+        min-width: 280px;
+        padding: 40px 25px;
+        margin: 20px;
+    }
+
+    .login-box h1 {
+        font-size: 50px;
+    }
+
+    .login-box h2 {
+        font-size: 20px;
+    }
+
+    #codeInput {
+        font-size: 18px;
+        padding: 18px;
+    }
+
+    button {
+        font-size: 20px;
+        padding: 18px;
     }
 
     .main-message {
-        font-size: 36px;
+        font-size: 40px;
+        margin-bottom: 30px;
     }
 
     .personal-message {
         font-size: 18px;
         max-width: 90%;
+        padding: 20px;
+        line-height: 1.9;
+        margin: 0 15px;
     }
 
     .flower {
-        width: 100px;
-        height: 100px;
+        width: 120px;
+        height: 120px;
     }
 
     .petal {
-        width: 40px;
-        height: 55px;
+        width: 48px;
+        height: 65px;
     }
 
     .center-circle {
-        width: 30px;
-        height: 30px;
+        width: 35px;
+        height: 35px;
+    }
+
+    .center-flower {
+        margin-bottom: 30px;
+    }
+}
+
+@media (max-width: 480px) {
+    .login-box {
+        min-width: 260px;
+        padding: 35px 20px;
+        margin: 15px;
+    }
+
+    .login-box h1 {
+        font-size: 45px;
+    }
+
+    .login-box h2 {
+        font-size: 18px;
+        margin-bottom: 25px;
+    }
+
+    #codeInput {
+        font-size: 16px;
+        padding: 16px;
+    }
+
+    button {
+        font-size: 18px;
+        padding: 16px;
+    }
+
+    .main-message {
+        font-size: 32px;
+    }
+
+    .personal-message {
+        font-size: 16px;
+        line-height: 1.8;
     }
 }

@@ -1,16 +1,8 @@
-// Code-zu-Nachricht Mapping
-// Hier kannst du deine personalisierten Codes und Nachrichten hinzufügen
+// الرموز والرسائل المخصصة
 const codeMessages = {
-    'LOVE2024': {
-        message: 'Du bist das Beste, was mir je passiert ist! ❤️'
-    },
     'ROSE123': {
-        message: 'Für die wunderbarste Person der Welt! 🌹'
-    },
-    'HEART456': {
-        message: 'Jeder Tag mit dir ist ein Geschenk! 💕'
+        message: 'رغم المسافة الكبيرة بيننا، وعدم قدرتي على إعطائك وردة حقيقية... أردت أن أهديكِ هذه الوردة الرقمية 🌹\n\nالمسافات لا تُضعف المشاعر الصادقة، بل تجعلها أقوى وأعمق 💕'
     }
-    // Weitere Codes können hier hinzugefügt werden
 };
 
 function checkCode() {
@@ -23,8 +15,8 @@ function checkCode() {
         errorMsg.textContent = '';
         showCelebration(codeMessages[code].message);
     } else {
-        // Falscher Code
-        errorMsg.textContent = 'Invalid code. Please try again.';
+        // رمز خاطئ
+        errorMsg.textContent = 'الرمز غير صحيح، حاولي مرة أخرى';
         input.value = '';
         input.classList.add('shake');
         setTimeout(() => {
@@ -51,10 +43,10 @@ function showCelebration(personalMessage) {
 
 function createFallingFlowers() {
     const container = document.getElementById('fallingFlowers');
-    const flowerEmojis = ['🌸', '🌺', '🌹', '🌷', '💐', '🌼', '💕', '❤️', '💖'];
+    const flowerEmojis = ['🌹', '🌺', '🌸', '🌷', '💐', '💕', '❤️', '💖', '✨'];
 
-    // 30 fallende Blumen erstellen
-    for (let i = 0; i < 30; i++) {
+    // 40 وردة متساقطة
+    for (let i = 0; i < 40; i++) {
         setTimeout(() => {
             const flower = document.createElement('div');
             flower.className = 'falling-flower';
@@ -76,10 +68,10 @@ function createFallingFlowers() {
 
             container.appendChild(flower);
 
-            // Blume nach Animation entfernen und neue erstellen
+            // إزالة الوردة بعد الانتهاء وإنشاء واحدة جديدة
             setTimeout(() => {
                 flower.remove();
-                if (container.children.length < 30) {
+                if (container.children.length < 40) {
                     createFallingFlowers();
                 }
             }, (duration + 2) * 1000);
