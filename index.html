@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>مفاجأة خاصة 🌹</title>
     <link rel="stylesheet" href="styles.css">
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 </head>
 <body>
     <div class="container" id="loginContainer">
@@ -20,7 +21,7 @@
     <div class="celebration" id="celebration">
         <div class="falling-flowers" id="fallingFlowers"></div>
 
-        <div class="message-container">
+        <div class="message-container" id="messageContainer">
             <div class="center-flower">
                 <div class="flower">
                     <div class="petal"></div>
@@ -33,6 +34,19 @@
             </div>
             <h1 class="main-message" id="mainMessage">🌹</h1>
             <p class="personal-message" id="personalMessage"></p>
+            <div class="action-buttons" id="actionButtons">
+                <button class="accept-btn" onclick="acceptRose()">قبول الوردة 💕</button>
+                <button class="reject-btn" onclick="rejectRose()">رفض الوردة</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="final-screen" id="finalScreen">
+        <div class="falling-flowers" id="finalFlowers"></div>
+        <div class="final-message-container">
+            <div class="final-emoji" id="finalEmoji">💕</div>
+            <h1 class="final-title" id="finalTitle">شكراً لك!</h1>
+            <p class="final-text" id="finalText">تم قبول الوردة بنجاح</p>
         </div>
     </div>
 

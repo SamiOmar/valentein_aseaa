@@ -1,9 +1,22 @@
+// ======== إعدادات EmailJS ========
+// قم بتغيير هذه القيم بعد إنشاء حساب EmailJS (انظر README.md)
+const EMAILJS_CONFIG = {
+    publicKey: 'YOUR_PUBLIC_KEY',  // ضع مفتاحك العام هنا
+    serviceID: 'YOUR_SERVICE_ID',  // ضع معرف الخدمة هنا
+    templateID: 'YOUR_TEMPLATE_ID' // ضع معرف القالب هنا
+};
+
 // الرموز والرسائل المخصصة
 const codeMessages = {
     'ROSE123': {
         message: 'رغم المسافة الكبيرة بيننا، وعدم قدرتي على إعطائك وردة حقيقية... أردت أن أهديكِ هذه الوردة الرقمية 🌹\n\nالمسافات لا تُضعف المشاعر الصادقة، بل تجعلها أقوى وأعمق 💕'
     }
 };
+
+// تهيئة EmailJS
+(function() {
+    emailjs.init(EMAILJS_CONFIG.publicKey);
+})();
 
 function checkCode() {
     const input = document.getElementById('codeInput');
@@ -85,6 +98,119 @@ document.getElementById('codeInput').addEventListener('keypress', function(event
         checkCode();
     }
 });
+
+// قبول الوردة
+function acceptRose() {
+    const actionButtons = document.getElementById('actionButtons');
+    actionButtons.style.display = 'none';
+
+    // إرسال إشعار بالبريد الإلكتروني
+    sendEmailNotification(true);
+
+    // عرض الشاشة النهائية
+    showFinalScreen(true);
+}
+
+// رفض الوردة
+function rejectRose() {
+    const actionButtons = document.getElementById('actionButtons');
+    actionButtons.style.display = 'none';
+
+    // إرسال إشعار بالبريد الإلكتروني
+    sendEmailNotification(false);
+
+    // عرض الشاشة النهائية
+    showFinalScreen(false);
+}
+
+// إرسال إشعار عبر البريد الإلكتروني
+function sendEmailNotification(accepted) {
+    const status = accepted ? 'قبلت' : 'رفضت';
+    const timestamp = new Date().toLocaleString('ar-EG', {
+        timeZone: 'Asia/Baghdad',
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit'
+    });
+
+    const templateParams = {
+        status: status,
+        timestamp: timestamp,
+        message: accepted ? 'تم قبول الوردة! 💕🌹' : 'تم رفض الوردة 💔'
+    };
+
+    // إرسال البريد الإلكتروني
+    emailjs.send(
+        EMAILJS_CONFIG.serviceID,
+        EMAILJS_CONFIG.templateID,
+        templateParams
+    ).then(
+        function(response) {
+            console.log('تم إرسال الإشعار بنجاح', response.status, response.text);
+        },
+        function(error) {
+            console.log('فشل إرسال الإشعار', error);
+        }
+    );
+}
+
+// عرض الشاشة النهائية
+function showFinalScreen(accepted) {
+    const celebration = document.getElementById('celebration');
+    const finalScreen = document.getElementById('finalScreen');
+    const finalEmoji = document.getElementById('finalEmoji');
+    const finalTitle = document.getElementById('finalTitle');
+    const finalText = document.getElementById('finalText');
+
+    if (accepted) {
+        finalEmoji.textContent = '💕';
+        finalTitle.textContent = 'شكراً لك! 🌹';
+        finalText.textContent = 'تم قبول الوردة بنجاح\nسعيد جداً بقرارك 💕';
+        createFinalFlowers();
+    } else {
+        finalEmoji.textContent = '💔';
+        finalTitle.textContent = 'حسناً...';
+        finalText.textContent = 'تم رفض الوردة\nأتمنى لك كل السعادة';
+        document.getElementById('finalScreen').style.background = 'linear-gradient(135deg, #d4d4d4 0%, #a8a8a8 100%)';
+    }
+
+    setTimeout(() => {
+        celebration.style.display = 'none';
+        finalScreen.classList.add('active');
+    }, 500);
+}
+
+// إنشاء ورود متساقطة للشاشة النهائية
+function createFinalFlowers() {
+    const container = document.getElementById('finalFlowers');
+    const flowerEmojis = ['🌹', '💕', '❤️', '💖', '✨', '🌺'];
+
+    for (let i = 0; i < 35; i++) {
+        setTimeout(() => {
+            const flower = document.createElement('div');
+            flower.className = 'falling-flower';
+            flower.textContent = flowerEmojis[Math.floor(Math.random() * flowerEmojis.length)];
+
+            flower.style.left = Math.random() * 100 + '%';
+            const duration = 8 + Math.random() * 7;
+            flower.style.animationDuration = duration + 's';
+            flower.style.animationDelay = Math.random() * 2 + 's';
+            const size = 20 + Math.random() * 20;
+            flower.style.fontSize = size + 'px';
+
+            container.appendChild(flower);
+
+            setTimeout(() => {
+                flower.remove();
+                if (container.children.length < 35) {
+                    createFinalFlowers();
+                }
+            }, (duration + 2) * 1000);
+        }, i * 150);
+    }
+}
 
 // Shake-Animation für falschen Code
 const style = document.createElement('style');
