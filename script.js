@@ -1,9 +1,8 @@
 // ======== إعدادات EmailJS ========
-// قم بتغيير هذه القيم بعد إنشاء حساب EmailJS (انظر README.md)
 const EMAILJS_CONFIG = {
-    publicKey: 'YOUR_PUBLIC_KEY',  // ضع مفتاحك العام هنا
-    serviceID: 'YOUR_SERVICE_ID',  // ضع معرف الخدمة هنا
-    templateID: 'YOUR_TEMPLATE_ID' // ضع معرف القالب هنا
+    publicKey: 'Rtavt_yDMtAkkQetd',
+    serviceID: 'service_lyq1mlr',
+    templateID: 'Rtavt_yDMtAkkQetd'
 };
 
 // الرموز والرسائل المخصصة
